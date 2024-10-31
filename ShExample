@@ -1,0 +1,27 @@
+import matplotlib.pyplot as plt
+import math
+import numpy as np
+from qiskit.circuit.library import NormalDistribution
+from math import pi
+from qiskit import IBMQ, BasicAer, Aer
+from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute
+from qiskit.visualization import plot_histogram
+
+#Preparing the sine-shaped histogram that will be used in the initialisation
+
+L = 1
+x = np.linspace(0,L, num=10)
+x = np.delete(x,[0,9])
+zero = np.zeros(8)
+x = np.append(x,zero)
+xaxis = np.linspace(0,2*L, num=16)
+storage_for_normalisation = []
+
+Normalisation_wavefunction = (np.sqrt(2/L)*np.sin(pi*x/L))
+
+Normalisation_Constant = np.sqrt(np.sum(Normalisation_wavefunction**2))
+
+waveFunction = (Normalisation_wavefunction)/(Normalisation_Constant)
+print(np.sum(waveFunction**2))
+plt.plot(xaxis,waveFunction)
+plt.show()
